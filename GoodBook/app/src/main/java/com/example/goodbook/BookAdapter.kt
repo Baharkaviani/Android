@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 class BookAdapter :
     RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
-    // Generates a [CharRange] from 'A' to 'Z' and converts it to a list
+    // Generates a list of books
     private val list = ('A').rangeTo('Z').toList()
 
     /**

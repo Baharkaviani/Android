@@ -76,7 +76,7 @@ class BookListFragment : Fragment() {
         if (isLinearLayoutManager) {
             recyclerView.layoutManager = LinearLayoutManager(context)
         } else {
-            recyclerView.layoutManager = GridLayoutManager(context, 4)
+            recyclerView.layoutManager = GridLayoutManager(context, 3)
         }
         recyclerView.adapter = BookAdapter()
     }
