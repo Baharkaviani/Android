@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Adapter for the [RecyclerView] in [DetailActivity].
  */
-class WordAdapter(private val letterId: String, context: Context) :
+class WordAdapter(private val bookId: String, context: Context) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
     private val filteredWords: List<String>
@@ -26,9 +26,9 @@ class WordAdapter(private val letterId: String, context: Context) :
 
         filteredWords = words
             // Returns items in a collection if the conditional clause is true,
-            // in this case if an item starts with the given letter,
+            // in this case if an item starts with the given book,
             // ignoring UPPERCASE or lowercase.
-            .filter { it.startsWith(letterId, ignoreCase = true) }
+            .filter { it.startsWith(bookId, ignoreCase = true) }
             // Returns a collection that it has shuffled in place
             .shuffled()
             // Returns the first n items as a [List]

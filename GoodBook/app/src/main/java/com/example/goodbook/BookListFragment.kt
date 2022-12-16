@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.goodbook.databinding.FragmentLetterListBinding
+import com.example.goodbook.databinding.FragmentBookListBinding
 
 /**
- * Entry fragment for the app. Displays a [RecyclerView] of letters.
+ * Entry fragment for the app. Displays a [RecyclerView] of books.
  */
-class LetterListFragment : Fragment() {
-    private var _binding: FragmentLetterListBinding? = null
+class BookListFragment : Fragment() {
+    private var _binding: FragmentBookListBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,7 +39,7 @@ class LetterListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Retrieve and inflate the layout for this fragment
-        _binding = FragmentLetterListBinding.inflate(inflater, container, false)
+        _binding = FragmentBookListBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -78,7 +78,7 @@ class LetterListFragment : Fragment() {
         } else {
             recyclerView.layoutManager = GridLayoutManager(context, 4)
         }
-        recyclerView.adapter = LetterAdapter()
+        recyclerView.adapter = BookAdapter()
     }
 
     private fun setIcon(menuItem: MenuItem?) {

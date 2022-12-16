@@ -20,7 +20,7 @@ class WordListFragment : Fragment() {
      * a DetailListFragment instance.
      */
     companion object {
-        val LETTER = "letter"
+        val BOOK = "book"
         val SEARCH_PREFIX = "https://www.google.com/search?q="
     }
 
@@ -30,14 +30,14 @@ class WordListFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var letterId: String
+    private lateinit var bookId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Retrieve the LETTER from the Fragment arguments
+        // Retrieve the BOOK from the Fragment arguments
         arguments?.let {
-            letterId = it.getString(LETTER).toString()
+            bookId = it.getString(BOOK).toString()
         }
     }
 
@@ -54,7 +54,7 @@ class WordListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = WordAdapter(letterId, requireContext())
+        recyclerView.adapter = WordAdapter(bookId, requireContext())
 
         // Adds a [DividerItemDecoration] between items
         recyclerView.addItemDecoration(
