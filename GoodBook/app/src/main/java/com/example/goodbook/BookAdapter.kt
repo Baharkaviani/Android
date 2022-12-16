@@ -17,7 +17,7 @@ class BookAdapter :
     RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     // Generates a list of books
-    private val list = ('A').rangeTo('Z').toList()
+    private val list = ('0').rangeTo('5').toList()
 
     /**
      * Provides a reference for the views needed to display items in your list.

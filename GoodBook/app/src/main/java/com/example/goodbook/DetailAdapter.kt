@@ -1,8 +1,6 @@
 package com.example.goodbook
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -25,15 +23,7 @@ class DetailAdapter(private val bookId: String, context: Context) :
         val details = context.resources.getStringArray(R.array.details).toList()
 
         filteredDetails = details
-            // Returns items in a collection if the conditional clause is true,
-            // in this case if an item starts with the given book,
-            // ignoring UPPERCASE or lowercase.
-            .filter { it.startsWith(bookId, ignoreCase = true) }
-            // Returns a collection that it has shuffled in place
-            .shuffled()
-            // Returns the first n items as a [List]
-            .take(5)
-            // Returns a sorted version of that [List]
+            .subList(5 * bookId.toInt(), 5 * bookId.toInt() + 5)
             .sorted()
     }
 

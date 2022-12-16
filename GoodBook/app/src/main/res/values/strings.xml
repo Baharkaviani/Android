@@ -8,6 +8,12 @@
     <string name="detail_list_fragment_label">Details That Start With {book}</string>
 
     <!--  book information  -->
+    <string name="book_name_default">Book Name</string>
+    <string name="writer_name_default">Writer Name</string>
+    <string name="year_default">Book Year</string>
+    <string name="publisher_default">Book Publisher</string>
+    <string name="brief_default">Book Brief</string>
+
     <string name="book_name_1">Hard Real-Time Computing Systems - Predictable Scheduling Algorithms and Applications</string>
     <string name="writer_name_1">Giorgio C. Buttazzo</string>
 
