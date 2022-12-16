@@ -52,9 +52,9 @@ class BookAdapter :
 
         // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
-            // Create an action from WordList to DetailList
+            // Create an action from DetailList to DetailList
             // using the required arguments
-            val action = BookListFragmentDirections.actionBookListFragmentToWordListFragment(book = holder.button.text.toString())
+            val action = BookListFragmentDirections.actionBookListFragmentToDetailListFragment(book = holder.button.text.toString())
             // Navigate using that action
             holder.view.findNavController().navigate(action)
         }
@@ -73,7 +73,7 @@ class BookAdapter :
             // accessibility service announces "double tap to activate".
             // If a custom string is provided,
             // it announces "double tap to <custom string>".
-            val customString = host.context?.getString(R.string.look_up_words)
+            val customString = host.context?.getString(R.string.look_up_details)
             val customClick =
                 AccessibilityNodeInfo.AccessibilityAction(
                     AccessibilityNodeInfo.ACTION_CLICK,

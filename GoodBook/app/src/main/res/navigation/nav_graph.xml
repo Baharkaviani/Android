@@ -10,14 +10,14 @@
         android:name="com.example.goodbook.BookListFragment"
         android:label="@string/app_name">
         <action
-            android:id="@+id/action_bookListFragment_to_wordListFragment"
-            app:destination="@id/wordListFragment" />
+            android:id="@+id/action_bookListFragment_to_detailListFragment"
+            app:destination="@id/detailListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/wordListFragment"
-        android:name="com.example.goodbook.WordListFragment"
-        android:label="@string/word_list_fragment_label"
-        tools:layout="@layout/fragment_word_list">
+        android:id="@+id/detailListFragment"
+        android:name="com.example.goodbook.DetailListFragment"
+        android:label="@string/detail_list_fragment_label"
+        tools:layout="@layout/fragment_detail_list">
         <argument
             android:name="book"
             app:argType="string" />

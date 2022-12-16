@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Adapter for the [RecyclerView] in [DetailActivity].
  */
-class WordAdapter(private val bookId: String, context: Context) :
-    RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
+class DetailAdapter(private val bookId: String, context: Context) :
+    RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
 
-    private val filteredWords: List<String>
+    private val filteredDetails: List<String>
 
     init {
-        // Retrieve the list of words from res/values/arrays.xml
-        val words = context.resources.getStringArray(R.array.words).toList()
+        // Retrieve the list of details from res/values/arrays.xml
+        val details = context.resources.getStringArray(R.array.details).toList()
 
-        filteredWords = words
+        filteredDetails = details
             // Returns items in a collection if the conditional clause is true,
             // in this case if an item starts with the given book,
             // ignoring UPPERCASE or lowercase.
@@ -37,16 +37,16 @@ class WordAdapter(private val bookId: String, context: Context) :
             .sorted()
     }
 
-    class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class DetailViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val button = view.findViewById<Button>(R.id.button_item)
     }
 
-    override fun getItemCount(): Int = filteredWords.size
+    override fun getItemCount(): Int = filteredDetails.size
 
     /**
      * Creates new views with R.layout.item_view as its template
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         val layout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_view, parent, false)
@@ -54,27 +54,20 @@ class WordAdapter(private val bookId: String, context: Context) :
         // Setup custom accessibility delegate to set the text read
         layout.accessibilityDelegate = Accessibility
 
-        return WordViewHolder(layout)
+        return DetailViewHolder(layout)
     }
 
     /**
      * Replaces the content of an existing view with new data
      */
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
 
-        val item = filteredWords[position]
+        val item = filteredDetails[position]
         // Needed to call startActivity
         val context = holder.view.context
 
-        // Set the text of the WordViewHolder
+        // Set the text of the DetailViewHolder
         holder.button.text = item
-
-        // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
-        holder.button.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${WordListFragment.SEARCH_PREFIX}${item}")
-            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
-            context.startActivity(intent)
-        }
     }
 
     // Setup custom accessibility delegate to set the text read with
@@ -90,7 +83,7 @@ class WordAdapter(private val bookId: String, context: Context) :
             // accessibility service announces "double tap to activate".
             // If a custom string is provided,
             // it announces "double tap to <custom string>".
-            val customString = host.context?.getString(R.string.look_up_word)
+            val customString = host.context?.getString(R.string.look_up_detail)
             val customClick =
                 AccessibilityNodeInfo.AccessibilityAction(
                     AccessibilityNodeInfo.ACTION_CLICK,
