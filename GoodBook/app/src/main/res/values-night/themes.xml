@@ -2,13 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.GoodBook" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryVariant">@color/teal_900</item>
+        <item name="colorPrimary">@color/blue_1</item>
+        <item name="colorPrimaryVariant">@color/blue_2</item>
         <item name="colorOnPrimary">@color/black</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue_200</item>
-        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorSecondary">@color/yellow_1</item>
+        <item name="colorSecondaryVariant">@color/yellow_2</item>
         <item name="colorOnSecondary">@color/black</item>
+
         <!-- Customize your theme here. -->
     </style>
 </resources>
