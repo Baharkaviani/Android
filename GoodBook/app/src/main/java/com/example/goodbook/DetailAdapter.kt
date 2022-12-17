@@ -23,7 +23,7 @@ class DetailAdapter(private val bookId: String, context: Context) :
         val details = context.resources.getStringArray(R.array.details).toList()
 
         filteredDetails = details
-            .subList(5 * bookId.toInt(), 5 * bookId.toInt() + 5)
+            .subList(3 * bookId.toInt(), 3 * bookId.toInt() + 3)
             .sorted()
     }
 
