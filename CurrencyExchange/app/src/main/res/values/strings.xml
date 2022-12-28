@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CurrencyExchange</string>
     <string name="rial_currency">Rial</string>
+    <string name="toman_currency">Toman</string>
     <string name="dollar_currency">Dollar</string>
     <string name="canada_dollar_currency">Canada Dollar</string>
     <string name="pound_currency">Pound</string>

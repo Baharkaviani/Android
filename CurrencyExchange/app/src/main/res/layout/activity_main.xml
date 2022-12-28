@@ -7,9 +7,11 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,8 +23,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/iran">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/rial_currency">
 
@@ -34,12 +43,33 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/iran">
             </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:hint="@string/toman_currency">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number">
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -49,8 +79,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/united_states">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/dollar_currency">
 
@@ -62,13 +99,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/united_states">
-            </ImageView>
-
         </LinearLayout>
 
         <LinearLayout
@@ -77,8 +107,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/canada">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/canada_dollar_currency">
 
@@ -90,13 +127,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/canada">
-            </ImageView>
-
         </LinearLayout>
 
         <LinearLayout
@@ -105,8 +135,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/united_kingdom">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/pound_currency">
 
@@ -118,13 +155,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/united_kingdom">
-            </ImageView>
-
         </LinearLayout>
 
         <LinearLayout
@@ -133,8 +163,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/euro">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/euro_currency">
 
@@ -146,13 +183,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/euro">
-            </ImageView>
-
         </LinearLayout>
 
         <LinearLayout
@@ -161,8 +191,15 @@
             android:orientation="horizontal"
             android:layout_margin="10dp">
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/united_arab_emirates">
+            </ImageView>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:hint="@string/dirham_currency">
 
@@ -173,13 +210,6 @@
                 </com.google.android.material.textfield.TextInputEditText>
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/united_arab_emirates">
-            </ImageView>
 
         </LinearLayout>
 
