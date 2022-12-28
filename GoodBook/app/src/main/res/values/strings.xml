@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoodBook</string>
+    <string name="detail_prefix">Details That Start With</string>
+    <string name="action_switch_layout">Switch Layout</string>
+    <string name="look_up_detail">Look up detail in a Browser Search</string>
+    <string name="look_up_details">Show Stored Details</string>
+    <string name="detail_list_fragment_label">Details That Start With {book}</string>
+
+    <!--  book information  -->
+    <string name="book_name_default">Book Name</string>
+    <string name="writer_name_default">Writer Name</string>
+    <string name="year_default">Book Year</string>
+    <string name="publisher_default">Book Publisher</string>
+    <string name="brief_default">Book Brief</string>
+
+    <string name="book_name_1">Hard Real-Time Computing Systems - Predictable Scheduling Algorithms and Applications</string>
+    <string name="writer_name_1">Giorgio C. Buttazzo</string>
+
+    <string name="book_name_2">Penetration Testing - A hands-on introduction to Hacking</string>
+    <string name="writer_name_2">Georgia Weidman</string>
+</resources>

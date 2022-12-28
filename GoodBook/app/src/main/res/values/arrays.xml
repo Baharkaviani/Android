@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="details">
+        <item>Hard Real-Time Computing Systems - Predictable Scheduling Algorithms and Applications</item>
+        <item>Giorgio C. Buttazzo</item>
+        <item>@drawable/real_time</item>
+
+        <item>Penetration Testing - A hands-on introduction to Hacking</item>
+        <item>Georgia Weidman</item>
+        <item>@drawable/penetration_testing</item>
+
+        <item>Everless</item>
+        <item>Sarah Holland</item>
+        <item>@drawable/everless</item>
+
+        <item>Evermore</item>
+        <item>Sarah Holland</item>
+        <item>@drawable/evermore</item>
+
+        <item>getting things done</item>
+        <item>David Allen</item>
+        <item>@drawable/getting_things_done</item>
+    </string-array>
+</resources>
