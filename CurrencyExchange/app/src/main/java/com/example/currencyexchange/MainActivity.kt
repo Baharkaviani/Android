@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     // currency conversion
     private val rialToToman = 0.1
-    private val rialToDollar = 0.000023853035 // https://www.xe.com/currencyconverter/convert/?Amount=1&From=IRR&To=USD
-    private val rialToCanadaDollar = 0.000032245751
-    private val rialToPound = 0.000019749743
-    private val rialToEuro = 0.000022419978
-    private val rialToDirham = 0.000087611241
+    private val rialToDollar = 0.0000024 // 0.0000023853035 // https://www.xe.com/currencyconverter/convert/?Amount=1&From=IRR&To=USD
+    private val rialToCanadaDollar = 0.0000033 //
+    private val rialToPound = 0.0000019
+    private val rialToEuro = 0.0000023
+    private val rialToDirham = 0.0000087
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
