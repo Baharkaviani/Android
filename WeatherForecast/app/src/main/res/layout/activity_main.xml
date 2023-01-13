@@ -10,40 +10,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="30dp"
         android:orientation="vertical">
-        <Spinner
-            android:id="@+id/spinner_state"
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"/>
-        <Spinner
-            android:id="@+id/spinner_city"
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"/>
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/submit"
-            android:layout_marginTop="30dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/separator"
-            android:layout_marginTop="7dp"/>
+            android:layout_margin="10dp"
+            android:text="@string/your_location_phrase"/>
+
         <Button
             android:id="@+id/location_button"
-            android:layout_width="190dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@color/blue_1"
+            android:text="@string/location"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/choose_location_phrase"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/location"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:background="@color/blue_1"
+                android:popupBackground="@color/yellow_1"/>
+            <Spinner
+                android:id="@+id/spinner_city"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:background="@color/blue_1"
+                android:popupBackground="@color/yellow_1"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="@string/apply"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/weather_layout"
@@ -194,6 +213,6 @@
             android:textStyle="bold"
             android:textSize="40sp"
             android:textAlignment="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/blue_2"/>
     </FrameLayout>
 </LinearLayout>
