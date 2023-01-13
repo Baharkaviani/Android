@@ -148,11 +148,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/tomorrow"
+                    android:text="@string/second_day"
                     android:textSize="20sp"
                     android:layout_marginEnd="40dp"/>
                 <TextView
-                    android:id="@+id/tomorrow_temp_text"
+                    android:id="@+id/second_day_temp_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -170,11 +170,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/two_days"
+                    android:text="@string/third_day"
                     android:textSize="20sp"
                     android:layout_marginEnd="40dp"/>
                 <TextView
-                    android:id="@+id/two_days_temp_text"
+                    android:id="@+id/third_day_temp_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -192,11 +192,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/three_days_later"
+                    android:text="@string/fourth_day"
                     android:textSize="20sp"
                     android:layout_marginEnd="40dp"/>
                 <TextView
-                    android:id="@+id/three_days_temp_text"
+                    android:id="@+id/fourth_day_temp_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -213,11 +213,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="@string/four_days"
+                    android:text="@string/fifth_day"
                     android:textSize="20sp"
                     android:layout_marginEnd="40dp"/>
                 <TextView
-                    android:id="@+id/four_days_temp_text"
+                    android:id="@+id/fifth_day_temp_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

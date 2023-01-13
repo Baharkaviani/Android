@@ -38,8 +38,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var locationManager: LocationManager
 
 
-    private val states = listOf("Tehran", "Mazandaran", "Khozestan")
-    private val cities = mapOf("Tehran" to listOf("Tehran", "Varamin"), "Mazandaran" to listOf("Babol", "Sari"), "Khozestan" to listOf("Ahvaz", "Nahavand"))
+    private val states = listOf("Tehran", "Yazd", "Isfahan", "Fars", "Kermanshah")
+    private val cities = mapOf("Tehran" to listOf("Tehran", "Eslamshahr", "Shahriar", "Malard", "Varamin"),
+                               "Yazd" to listOf("Yazd", "Meybod", "Nurabad", "Bafq", "Hamidiya"),
+                               "Isfahan" to listOf("Isfahan", "Kashan", "Najafabad", "Shahreza", "Baharestan", "Falavarjan"),
+                               "Fars" to listOf("Shiraz", "Marvdasht", "Jahrom", "Fasa", "Kazerun", "Darab"),
+                               "Kermanshah" to listOf("Kermanshah", "Kangavar", "Harsin", "Sonqor", "Paveh"))
 
     private lateinit var currentState: String
     private lateinit var currentCity: String
@@ -194,10 +198,10 @@ class MainActivity : AppCompatActivity() {
                     loadImage((((days.get(0) as JSONObject).get("weather") as JSONArray).get(0) as JSONObject).get("icon").toString())
                     binding.dateTime.text = (days.get(0) as JSONObject).get("dt_txt").toString()
                     binding.todayTempText.text = ((days.get(0) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.tomorrowTempText.text = ((days.get(1) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.twoDaysTempText.text = ((days.get(2) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.threeDaysTempText.text = ((days.get(3) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.fourDaysTempText.text = ((days.get(4) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.secondDayTempText.text = ((days.get(1) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.thirdDayTempText.text = ((days.get(2) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.fourthDayTempText.text = ((days.get(3) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.fifthDayTempText.text = ((days.get(4) as JSONObject).get("main") as JSONObject).get("temp").toString()
                 }
             }
         })

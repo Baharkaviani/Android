@@ -8,14 +8,15 @@
     <string name="choose_location_phrase">Or select location from this list:</string>
 
     <!--  show information section  -->
-    <string name="city_default">city</string>
-    <string name="time_default">01/01 12:12</string>
     <string name="today">Today</string>
-    <string name="default_temp">85c</string>
-    <string name="tomorrow">Tomorrow</string>
-    <string name="two_days">Two days later</string>
-    <string name="three_days_later">Three days later</string>
-    <string name="four_days">Four days later</string>
+    <string name="second_day">2nd day (tomorrow)</string>
+    <string name="third_day">3rd day</string>
+    <string name="fourth_day">4th day</string>
+    <string name="fifth_day">5th day</string>
+
+    <string name="city_default">city</string>
+    <string name="time_default">01/01</string>
+    <string name="default_temp">0c</string>
     <string name="error">No Internet</string>
     <string name="icon_discription">Icon for weather</string>
 </resources>
