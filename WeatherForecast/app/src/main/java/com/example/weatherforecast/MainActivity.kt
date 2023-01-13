@@ -26,71 +26,96 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val client = OkHttpClient()
-    private val apiKey = "40c1309c255992b7b8cc59f2f8f63679"
-    private val cityUrl = "https://api.openweathermap.org/geo/1.0/direct?q=%s,IR&limit=5&appid=%s"
-    private val forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?cnt=5&units=metric&lat=%s&lon=%s&appid=%s"
-    private val iconUrl = "https://openweathermap.org/img/wn/%s@2x.png"
-
-    private val logTag = "WTHR"
-
-    private var currentLocation: Location? = null
-    lateinit var locationManager: LocationManager
-
-
     private val states = listOf("Tehran", "Yazd", "Isfahan", "Fars", "Kermanshah")
     private val cities = mapOf("Tehran" to listOf("Tehran", "Eslamshahr", "Shahriar", "Malard", "Varamin"),
-                               "Yazd" to listOf("Yazd", "Meybod", "Nurabad", "Bafq", "Hamidiya"),
-                               "Isfahan" to listOf("Isfahan", "Kashan", "Najafabad", "Shahreza", "Baharestan", "Falavarjan"),
-                               "Fars" to listOf("Shiraz", "Marvdasht", "Jahrom", "Fasa", "Kazerun", "Darab"),
-                               "Kermanshah" to listOf("Kermanshah", "Kangavar", "Harsin", "Sonqor", "Paveh"))
+        "Yazd" to listOf("Yazd", "Meybod", "Nurabad", "Bafq", "Hamidiya"),
+        "Isfahan" to listOf("Isfahan", "Kashan", "Najafabad", "Shahreza", "Baharestan", "Falavarjan"),
+        "Fars" to listOf("Shiraz", "Marvdasht", "Jahrom", "Fasa", "Kazerun", "Darab"),
+        "Kermanshah" to listOf("Kermanshah", "Kangavar", "Harsin", "Sonqor", "Paveh"))
 
-    private lateinit var currentState: String
-    private lateinit var currentCity: String
+    private val client = OkHttpClient()
+    private var selectedLocation: Location? = null
+    lateinit var locationManager: LocationManager
+    private lateinit var selectedState: String
+    private lateinit var selectedCity: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun requestCityName(cityName: String) {
+        val request = Request.Builder()
+            .url(String.format("https://api.openweathermap.org/geo/1.0/direct?q=%s,IR&limit=5&appid=%s",
+                               cityName,
+                               "40c1309c255992b7b8cc59f2f8f63679"))
+            .build()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.errorLayout.visibility = View.GONE
-        binding.weatherLayout.visibility = View.GONE
-
-        var stateSpinner = binding.spinnerState
-        val stateAdapter: ArrayAdapter<String> =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, states)
-        stateSpinner.adapter = stateAdapter
-
-        stateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
-                currentState = states[stateSpinner.selectedItemId.toInt()]
-
-                currentCity = null.toString()
-                val citySpinner = binding.spinnerCity
-                val cityAdapter: ArrayAdapter<String> =
-                    ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, cities[currentState]!!)
-                citySpinner.adapter = cityAdapter
-                citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                        currentCity = cities[currentState]!![citySpinner.selectedItemId.toInt()]
-                    }
-
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-                        TODO("Not yet implemented")
-                    }
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                this@MainActivity.runOnUiThread {
+                    binding.weatherLayout.visibility = View.GONE
+                    binding.errorLayout.visibility = View.VISIBLE
                 }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+            override fun onResponse(call: Call, response: Response) {
+                val result = response.body()?.string()?.let { JSONArray(it) }
+                val lat = (result!!.get(0) as JSONObject).get("lat").toString().toDouble()
+                val lon = (result.get(0) as JSONObject).get("lon").toString().toDouble()
+                requestToFindWeatherInfo(lat, lon)
             }
-        }
-        binding.submitButton.setOnClickListener{searchByName(currentCity)}
-        binding.locationButton.setOnClickListener{getLocation()}
+        })
     }
 
-    private fun isLocationPermissionGranted(): Boolean {
+    private fun requestToFindWeatherInfo(latitude: Double, longitude: Double) {
+        val request = Request.Builder()
+            .url(String.format("https://api.openweathermap.org/data/2.5/forecast?cnt=5&units=metric&lat=%s&lon=%s&appid=%s",
+                               latitude.toString(),
+                               longitude.toString(),
+                               "40c1309c255992b7b8cc59f2f8f63679"))
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                this@MainActivity.runOnUiThread {
+                    binding.weatherLayout.visibility = View.GONE
+                    binding.errorLayout.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                val result = response.body()?.string()?.let { JSONObject(it) }
+                val days = result!!.get("list") as JSONArray
+                this@MainActivity.runOnUiThread {
+                    binding.errorLayout.visibility = View.GONE
+                    binding.weatherLayout.visibility = View.VISIBLE
+
+                    binding.cityText.text = (result.get("city") as JSONObject).get("name").toString()
+                    binding.dateTime.text = (days.get(0) as JSONObject).get("dt_txt").toString()
+
+                    // show the weather for 5 days
+                    val temp = ((days.get(0) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.todayTempText.text = temp
+                    binding.secondDayTempText.text = ((days.get(1) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.thirdDayTempText.text = ((days.get(2) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.fourthDayTempText.text = ((days.get(3) as JSONObject).get("main") as JSONObject).get("temp").toString()
+                    binding.fifthDayTempText.text = ((days.get(4) as JSONObject).get("main") as JSONObject).get("temp").toString()
+
+                    val weather_image = binding.todayIcon
+                    weather_image.setImageResource(R.drawable.sunny)
+
+                    if (temp.toDouble() > 2)
+                        weather_image.setImageResource(R.drawable.sunny)
+                    else if (temp.toDouble() <= 2 && temp.toDouble() > 0)
+                        weather_image.setImageResource(R.drawable.partly_cloudy)
+                    else if (temp.toDouble() <= 0 && temp.toDouble() > -2)
+                        weather_image.setImageResource(R.drawable.rainy)
+                    else if (temp.toDouble() <= -2 && temp.toDouble() > -4)
+                        weather_image.setImageResource(R.drawable.rainy2)
+                    else
+                        weather_image.setImageResource(R.drawable.rainy3)
+                }
+            }
+        })
+    }
+
+    private fun checkLocationPermission(): Boolean {
         return if (ActivityCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -113,8 +138,51 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.errorLayout.visibility = View.GONE
+        binding.weatherLayout.visibility = View.GONE
+
+        var stateSpinner = binding.spinnerState
+        val stateAdapter: ArrayAdapter<String> =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, states)
+        stateSpinner.adapter = stateAdapter
+
+        stateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+                selectedState = states[stateSpinner.selectedItemId.toInt()]
+
+                selectedCity = null.toString()
+                val citySpinner = binding.spinnerCity
+                val cityAdapter: ArrayAdapter<String> =
+                    ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, cities[selectedState]!!)
+                citySpinner.adapter = cityAdapter
+                citySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                        selectedCity = cities[selectedState]!![citySpinner.selectedItemId.toInt()]
+                    }
+
+                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                        TODO("Not yet implemented")
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+        binding.submitButton.setOnClickListener{requestCityName(selectedCity)}
+        binding.locationButton.setOnClickListener{getLocation()}
+    }
+
     private fun getLocation() {
-        if (!isLocationPermissionGranted()) {
+        // first check if the location permission is allowed or not
+        if (!checkLocationPermission()) {
             return
         }
         var locationByGps : Location? = null
@@ -141,93 +209,14 @@ class MainActivity : AppCompatActivity() {
                 lastKnownLocationByGps?.let {
                     locationByGps = lastKnownLocationByGps
                 }
-                currentLocation = locationByGps
-                var latitude = currentLocation?.latitude
-                var longitude = currentLocation?.longitude
+                selectedLocation = locationByGps
+                var latitude = selectedLocation?.latitude
+                var longitude = selectedLocation?.longitude
                 if (longitude != null && latitude != null) {
-                    search(latitude, longitude)
+                    requestToFindWeatherInfo(latitude, longitude)
                 }
             } catch (e: SecurityException){
                 return
-            }
-        }
-    }
-
-    private fun searchByName(cityName: String) {
-        val request = Request.Builder()
-            .url(String.format(cityUrl, cityName, apiKey))
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                this@MainActivity.runOnUiThread {
-                    binding.weatherLayout.visibility = View.GONE
-                    binding.errorLayout.visibility = View.VISIBLE
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val result = response.body()?.string()?.let { JSONArray(it) }
-                val lat = (result!!.get(0) as JSONObject).get("lat").toString().toDouble()
-                val lon = (result.get(0) as JSONObject).get("lon").toString().toDouble()
-                search(lat, lon)
-            }
-        })
-    }
-
-    private fun search(latitude: Double, longitude: Double) {
-        val request = Request.Builder()
-            .url(String.format(forecastUrl, latitude.toString(), longitude.toString(), apiKey))
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                this@MainActivity.runOnUiThread {
-                    binding.weatherLayout.visibility = View.GONE
-                    binding.errorLayout.visibility = View.VISIBLE
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val result = response.body()?.string()?.let { JSONObject(it) }
-                val days = result!!.get("list") as JSONArray
-                this@MainActivity.runOnUiThread {
-                    binding.errorLayout.visibility = View.GONE
-                    binding.weatherLayout.visibility = View.VISIBLE
-                    binding.cityText.text = (result.get("city") as JSONObject).get("name").toString()
-                    loadImage((((days.get(0) as JSONObject).get("weather") as JSONArray).get(0) as JSONObject).get("icon").toString())
-                    binding.dateTime.text = (days.get(0) as JSONObject).get("dt_txt").toString()
-                    binding.todayTempText.text = ((days.get(0) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.secondDayTempText.text = ((days.get(1) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.thirdDayTempText.text = ((days.get(2) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.fourthDayTempText.text = ((days.get(3) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                    binding.fifthDayTempText.text = ((days.get(4) as JSONObject).get("main") as JSONObject).get("temp").toString()
-                }
-            }
-        })
-    }
-
-    private fun loadImage(icon: String) {
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        var image: Bitmap? = null
-        print("icon printed")
-        print(icon)
-
-        executor.execute {
-            val imageURL = String.format(iconUrl, icon)
-
-            // Tries to get the image and post it in the ImageView with the help of Handler
-            try {
-                val `in` = java.net.URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-
-                handler.post {
-                    binding.todayIcon.setImageBitmap(image)
-                }
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
             }
         }
     }
