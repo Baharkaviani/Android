@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">WeatherForecast</string>
+<string name="app_name">WeatherForecast</string>
+<string name="action_settings">Settings</string>
+<!-- Strings used for fragments for navigation -->
+<string name="first_fragment_label">First Fragment</string>
+<string name="second_fragment_label">Second Fragment</string>
+<string name="next">Next</string>
+<string name="previous">Previous</string>
+
+<string name="hello_first_fragment">Hello first fragment</string>
+<string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+<string name="submit">submit</string>
+<string name="separator">or</string>
+<string name="location">current location</string>
+<string name="city_default">city</string>
+<string name="time_default">01/01 12:12</string>
+<string name="today">Today</string>
+<string name="default_temp">85c</string>
+<string name="tomorrow">Tomorrow</string>
+<string name="two_days">Two days later</string>
+<string name="three_days_later">Three days later</string>
+<string name="four_days">Four days later</string>
+<string name="error">ERROR\nTRY AGAIN</string>
+<string name="icon_discription">Icon for weather</string>
 </resources>
